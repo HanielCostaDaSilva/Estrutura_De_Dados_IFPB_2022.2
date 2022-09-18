@@ -134,6 +134,3 @@ class Pilha:
             cont+=1
             cursor=cursor.prox
         return s + f'tamanho: {self.__tamanho}'
-
-
-

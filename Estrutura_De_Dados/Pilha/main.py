@@ -1,29 +1,71 @@
 #from pilhaSequencial import *
 from pilhaEncadeada import *
 
-numeros = [4,5,6,90,56,31,42,57]
+#== == == == Variáveis
+separador= '\n'+('-0-0'*30)
 
-pilha = Pilha()
-for n in numeros:
-    pilha.empilha(n)
+stringsLista=['Letra','UmaLetra','OutraLetra','TerceiraLetra','QuartaLetra','23']
+inteirosLista=[0,2,4,6,8,10,12,14,16,18,20,22,24,26]
 
-print('Array: ',numeros)
-print('Pilha: ', pilha)
+#== == == == Criando as Pilhas
+pilhaInteiros = Pilha()
+pilhaLetras=Pilha()
 
-string = 'Instituto Federal da Paraiba'
-pilha.esvazia()
-print(string)
-for s in string:
-    pilha.empilha(s)
-print()
+#== == == == == Empilhando
 
-while(not pilha.estaVazia()):
-    print(pilha.desempilha(),end='')
+for i in stringsLista:
+    pilhaLetras.empilha(i)
 
-
+for i in inteirosLista:
+    pilhaInteiros.empilha(i)
 
 try:
-    print
-    print(pilha.busca(90))
-except PilhaException as pe:
-    print(pe)
+    print(pilhaInteiros)
+    print(pilhaLetras)
+    print(separador)
+    
+#== == == == == Buscando Elementos por posição   
+    #print(pilhaLetras.busca('EstaLetra'))
+    #print(pilhaInteiros.busca(13))
+    
+    print(pilhaLetras.busca('Letra'))
+    print(pilhaInteiros.busca(6))
+    print(separador)
+    
+#== == == == ==Desempilhando    
+    pilhaInteiros.desempilha()
+    pilhaLetras.desempilha()
+    print(pilhaInteiros,'\n', pilhaLetras)
+    print(separador)
+    
+    #print(pilhaInteiros.elemento(20))
+    #print(pilhaLetras.elemento(30))
+    
+#== == == == Descubrindo o conteudo de elementos através da posição 
+    print(pilhaInteiros.elemento(3))
+    print(pilhaLetras.elemento(5))
+    print(separador)
+    
+
+#== == == == Modificando o conteudo de elementos 
+    for i in range(pilhaInteiros.tamanho):
+        pilhaInteiros.modificar(i+1,pilhaInteiros.elemento(i+1) *4)
+    
+
+    
+    for j in range(pilhaLetras.tamanho):
+        pilhaLetras.modificar(j+1,'Não é ' + pilhaLetras.elemento(j+1))
+    
+    print('\n',pilhaInteiros,'\n\n', pilhaLetras)
+    print(separador)
+
+#== == == == Esvaziando a Lista
+
+    pilhaLetras.esvazia()
+    pilhaInteiros.esvazia()
+    print('\n',pilhaInteiros,'\n\n', pilhaLetras)
+    print(separador)
+
+#== == == == Possíveis excessões    
+except PilhaException as PE:
+    print(PE)
