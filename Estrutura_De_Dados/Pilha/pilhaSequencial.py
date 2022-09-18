@@ -5,7 +5,7 @@ class PilhaException(Exception):
         
 #== == == == No é o elemento que será adiciona na estrutura de dados encadeada.
 
-#== == == == A estrutura de dado Pilha, ou FIFO.
+#== == == == A estrutura de dado Pilha, ou LIFO.
 class Pilha:
     def __init__(self):
         self.__pilha=[] # A pilha inicia vazia.

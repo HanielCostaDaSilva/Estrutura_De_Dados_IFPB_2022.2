@@ -12,7 +12,7 @@ class No :
     def __str__(self):
         return str(self.value)
     
-#== == == == A estrutura de dado Pilha, ou FIFO.
+#== == == == A estrutura de dado Pilha, ou LIFO.
 class Pilha:
     def __init__(self):
         self.__start= None  #Seu primeiro elemento é None, até receber nós
