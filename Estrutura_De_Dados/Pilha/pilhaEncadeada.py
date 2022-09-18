@@ -104,9 +104,10 @@ class Pilha:
     def desempilha(self)->any:
         try:
             assert not self.estaVazia() ,'A lista está vazia!'
-            
+            noValor= self.__start.value
             self.__start=self.__start.prox
             self.__tamanho-=1
+            return noValor
             
         except AssertionError as AE:
             raise PilhaException(AE)

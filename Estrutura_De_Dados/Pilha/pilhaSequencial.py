@@ -4,45 +4,28 @@ class PilhaException(Exception):
         super().__init__(msg)
         
 #== == == == No é o elemento que será adiciona na estrutura de dados encadeada.
-class No :
-    def __init__(self,valor) -> None:
-        self.value= valor # ele possui um valor
-        self.prox= None # como também um apontador
-    
-    def __str__(self):
-        return str(self.value)
-    
+
 #== == == == A estrutura de dado Pilha, ou FIFO.
 class Pilha:
     def __init__(self):
-        self.__start= None  #Seu primeiro elemento é None, até receber nós
-        self.__tamanho=0 #Ela inicia vazia
+        self.__pilha=[] # A pilha inicia vazia.
 
 #== == == == Método para examinar se a pilha está vazia
     def estaVazia(self)->bool:
-        return self.__tamanho == 0
+        return len(self.__pilha) == 0
     
 #== == == == Método para checar o tamanho da Pilha
-    @property
-    def tamanho(self)->int:
-        return self.__tamanho
+    def tamanho(self):
+        return len(self.__pilha)
 
 #== == == == Método que retornára o contéudo de um nó dependendo da possição exigida.
     def elemento(self, posicao:int)->any:
         try:
             #== == Só funciona se: a pilha NÃO estiver vazia e a posição inserida não exceda o tamanho da lista.
             assert not self.estaVazia() ,'A lista está vazia!'
-            assert self.__tamanho>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da pilha é de {self.__tamanho} nó(s)!'
+            assert self.tamanho()>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da pilha é de {self.tamanho()} nó(s)!'
             
-            cursor=self.__start #Cursor é quem percorrerá cada nó, ele inicia no topo da Pilha
-            valorNo=cursor.value #valorNo é a variável que armazena o valor
-            passos= self.__tamanho - posicao #passos é a quantidade de nós que o cursor percorrerá
-            cont=1
-            
-            while cont <= passos:
-                cursor=cursor.prox
-                valorNo=cursor.value
-                cont+=1
+            return self.__pilha[posicao-1]
         
         except AssertionError as AE:
             raise PilhaException(AE)
@@ -56,14 +39,11 @@ class Pilha:
         try:
             #== == O método só não funciona quando a lista estiver vazia
             assert not self.estaVazia() ,'A lista está vazia!'
-            cursor=self.__start #cursor é quem pecorre a pilha
-            cont=0
-            while cont < self.__tamanho: # será percorrido ou até o final da lista ou até encontrar o contéudo.
-                cont+=1
-                if cursor.value == conteudo:
-                    return cont        
-                cursor=cursor.prox 
-                
+            
+            for i in range(len(self.__pilha)):
+                if self.__pilha[i]==conteudo:
+                    return i
+                              
             raise PilhaException('Contéudo inserido não foi encontrado!') # o contéudo não foi Achado.
     
         except AssertionError as AE:
@@ -76,18 +56,10 @@ class Pilha:
         try:
             #== == Só funciona se: a pilha NÃO estiver vazia e a posição inserida não exceda o tamanho da lista.
             assert not self.estaVazia() ,'A lista está vazia!'
-            assert self.__tamanho>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da pilha é de {self.__tamanho} nó(s)!'
-            
-            cursor=self.__start
-            passos= self.__tamanho - posicao
-            cont=1
-            
-            while cont <= passos:
-                cursor=cursor.prox 
-                cont+=1  
-            
-            cursor.value=conteudo
-            
+            assert self.tamanho()>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da pilha é de {self.tamanho()} nó(s)!'
+        
+            self.__pilha[posicao-1]= conteudo
+ 
         except AssertionError as AE:
             raise PilhaException(AE)
         
@@ -96,17 +68,13 @@ class Pilha:
         
     #== == Adiciona um novo Nó na Pilha.
     def empilha(self, conteudo:any):
-        novoNo=No(conteudo)
-        novoNo.prox=self.__start
-        self.__start=novoNo
-        self.__tamanho +=1
+        self.__pilha.append(conteudo) # O final da lista é considerado o topo.
+        
     #== == Remove o Ùltimo Nó adicionado na Pilha.
     def desempilha(self)->any:
         try:
             assert not self.estaVazia() ,'A lista está vazia!'
-            
-            self.__start=self.__start.prox
-            self.__tamanho-=1
+            return self.__pilha.pop() # Remove no final da lista, o topo.
             
         except AssertionError as AE:
             raise PilhaException(AE)
@@ -117,20 +85,15 @@ class Pilha:
     #== == Desempilha a pilha até ela possuir Zero Nós.
     def esvazia(self):
         try:
-            while self.__tamanho>0:
-                self.desempilha()
+            return self.__pilha.clear()
         except:
             pass
 
 
     def __str__(self)->str:
-        if self.__tamanho==0:
+        if self.tamanho()==0:
             return 'Empty'
         s = ''
-        cont=0
-        cursor=self.__start
-        while cont< self.__tamanho:
-            s+=f'|Nó {self.__tamanho-cont}: {cursor}| '
-            cont+=1
-            cursor=cursor.prox
-        return s + f'tamanho: {self.__tamanho}'
+        for i in range(len(self.__pilha)):
+            s+= f'=|Nó {i+1}: {self.__pilha[i]} |= '
+        return s + f'\n tamanho: {len(self.__pilha)}'

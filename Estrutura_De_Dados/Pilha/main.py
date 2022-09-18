@@ -48,12 +48,12 @@ try:
     
 
 #== == == == Modificando o conteudo de elementos 
-    for i in range(pilhaInteiros.tamanho):
+    for i in range(3):
         pilhaInteiros.modificar(i+1,pilhaInteiros.elemento(i+1) *4)
     
 
     
-    for j in range(pilhaLetras.tamanho):
+    for j in range(3):
         pilhaLetras.modificar(j+1,'Não é ' + pilhaLetras.elemento(j+1))
     
     print('\n',pilhaInteiros,'\n\n', pilhaLetras)
@@ -61,9 +61,9 @@ try:
 
 #== == == == Esvaziando a Lista
 
-    pilhaLetras.esvazia()
-    pilhaInteiros.esvazia()
-    print('\n',pilhaInteiros,'\n\n', pilhaLetras)
+    print(pilhaLetras.esvazia())
+    print(pilhaInteiros.esvazia())
+    #print('\n',pilhaInteiros,'\n\n', pilhaLetras)
     print(separador)
 
 #== == == == Possíveis excessões    
