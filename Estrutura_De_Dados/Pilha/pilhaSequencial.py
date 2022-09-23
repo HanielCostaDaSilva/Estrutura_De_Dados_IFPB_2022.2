@@ -88,7 +88,28 @@ class Pilha:
             return self.__pilha.clear()
         except:
             pass
-
+        
+    
+    #== == Mètodo extra 1... Concatenador de Pilhas.
+    
+    def concatenar(self,outraPilha):
+        pilhaAuxiliar=Pilha()
+        while not outraPilha.estaVazia():
+            pilhaAuxiliar.empilha(outraPilha.desempilha())
+        
+        while not pilhaAuxiliar.estaVazia():
+            self.empilha(pilhaAuxiliar.desempilha())
+            
+    
+    #== == Mètodo extra 2... Inversor de Pilhas.
+    
+    def inverter(self):
+        pilhaAuxiliar=Pilha()
+        while not self.estaVazia():
+            pilhaAuxiliar.empilha(self.desempilha())
+        
+        self.__pilha=pilhaAuxiliar.__pilha
+        
 
     def __str__(self)->str:
         if self.tamanho()==0:

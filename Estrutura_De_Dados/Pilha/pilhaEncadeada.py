@@ -122,6 +122,21 @@ class Pilha:
                 self.desempilha()
         except:
             pass
+    
+    
+    #== == Mètodo extra 1... Concatenador de Pilhas.
+    
+    def concatenar(self,outraPilha):
+        pilhaAuxiliar=Pilha()
+        while not outraPilha.estaVazia():
+            pilhaAuxiliar.empilha(outraPilha.desempilha())
+        
+        while not pilhaAuxiliar.estaVazia():
+            self.empilha(pilhaAuxiliar.desempilha())
+            
+    
+
+
 
 
     def __str__(self)->str:
