@@ -28,15 +28,15 @@ try:
 #== == == == == Buscando Elementos por posição   
     #print(filaLetras.busca('EstaLetra'))
     #print(filaInteiros.busca(13))
-    
+    print('buscando a posição de determinados nós')
     print(filaLetras.busca('UmaLetra'))
     print(filaInteiros.busca(6))
     print(separador)
     
     input(' ')
 #== == == == ==Desenfileirando    
-    filaInteiros.desenfileira()
-    filaLetras.desenfileira()
+    print('Saiu este nó: ',filaInteiros.desenfileira())
+    print('Saiu este nó: ',filaLetras.desenfileira())
     print(filaInteiros,'\n', filaLetras)
     print(separador)
     
@@ -45,7 +45,7 @@ try:
     #print(filaLetras.elemento(30))
     
 #== == == == Descubrindo o conteudo de elementos através da posição 
-    print(filaInteiros.elemento(3))
+    print('descobrindo o contéudo de uma posição X \n',filaInteiros.elemento(3))
     print(filaLetras.elemento(5))
     print(separador)
     
@@ -60,13 +60,13 @@ try:
     for j in range(3):
         filaLetras.modificar(j+1,'Não é ' + filaLetras.elemento(j+1))
     
-    print('\n',filaInteiros,'\n\n', filaLetras)
+    print('Modifcano os nós\n',filaInteiros,'\n\n', filaLetras)
     print(separador)
     input(' ')
 
 #== == == == Esvaziando a Lista
 
-    print(filaLetras.esvazia())
+    print('esvaziando a fila \n',filaLetras.esvazia())
     print(filaInteiros.esvazia())
     #print('\n',filaInteiros,'\n\n', filaLetras)
     print(separador)
@@ -74,6 +74,7 @@ try:
 
 
 #== == == == Inserido elementos depois de apagar a lista:
+    print('inserindo elementos em um nó depois de tê-lo esvaziado')
     for i in range(10):
         filaInteiros.enfileira((( (i+10) * 4 +2 ) %5)-12 )
         filaLetras.enfileira('Letra '* ( ((i+1)%3)+1) )
