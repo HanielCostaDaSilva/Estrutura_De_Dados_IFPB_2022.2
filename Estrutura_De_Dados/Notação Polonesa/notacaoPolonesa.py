@@ -1,3 +1,6 @@
+from xmlrpc.client import boolean
+
+
 class NotacaoException(Exception):
     def __init__(self,msg):
         super().__init__(msg)
@@ -40,8 +43,10 @@ class NotacaoPosfixa:
                 if termo=='(':
                     parentesesAberto +=1
                     
-                if termo==')' and parentesesAberto %2==0:
-                    raise NotacaoException('foi recebido ")" sendo que não foi inserido nenhum "(" antes.')
+                if termo==')':
+                    if parentesesAberto == 0:
+                        raise NotacaoException('foi recebido ")" sendo que não foi inserido nenhum "(" antes.')
+                    parentesesAberto -=1
                 
                 
                 if operacaoLista.index(termo)==0:
@@ -81,12 +86,11 @@ class NotacaoPosfixa:
             self.empilharOperadorLista(operador)
 
         elif operador== ')': #caso o operador seja um  ')' a pilha desempilhará até achar um '('
-            for i in range(len(self.__operacaoPilha)):
-                if self.__operacaoPilha[-(i+1)] =='(':
-                    break
-                self.desempilharOperadorLista()
+                parentesesAbertoAchado= True
+                while parentesesAbertoAchado: 
+                    parentesesAbertoAchado=self.desempilharOperadorLista() 
                       
-        elif not(self.conferirTopoMaiorPrioridade(operador)): # caso o operador seja de prioridade menor que o anterior
+        elif self.conferirOperadorMaiorIgualQueTopoPrioridade(operador): # caso o operador seja de prioridade menor que o anterior
             self.empilharOperadorLista(operador)
         
         else: 
@@ -95,11 +99,11 @@ class NotacaoPosfixa:
     
     
     
-    def conferirTopoMaiorPrioridade(self,operador)->bool: #checa se a prioridade do operador no topo é maior que o operador analisado
-        if self.__prioridadeTopo > self.__prioridadesOperadores[operador] and self.__prioridadeTopo>1:
-            return True
-        else:
+    def conferirOperadorMaiorIgualQueTopoPrioridade(self,operador)->bool: #checa se a prioridade do operador no topo é maior que o operador analisado
+        if self.__prioridadeTopo >= self.__prioridadesOperadores[operador]: # se a prioridade do topo for maior que o analisado
             return False
+        else:
+            return True
     
     def empilharOperadorLista(self, operador): #acrescenta um elemento no topo da pilha
         self.__operacaoPilha.append(operador)
@@ -110,11 +114,16 @@ class NotacaoPosfixa:
         while self.__operacaoPilha.__len__()>0:
             self.desempilharOperadorLista()
 
-    def desempilharOperadorLista(self): #remove o elemento no topo da pilha
-        self.__saida += self.__operacaoPilha.pop()
+    def desempilharOperadorLista(self) ->boolean: #remove o elemento no topo da pilha
+        operadorDesempilhado=self.__operacaoPilha.pop() 
+        
+        if operadorDesempilhado!='(': #caso o elemento desempilhado sej um '('
+            self.__saida += operadorDesempilhado 
+            return False
+        
         if len(self.__operacaoPilha)>0: # Muda a pioridade do topo para o proximo elemento
             self.ArmazenarPrioridadeTopo(self.__operacaoPilha[len(self.__operacaoPilha)-1])
-            
+        return True
     
 
     def ArmazenarPrioridadeTopo(self,operador): #Armazena a prioridade do topo atual

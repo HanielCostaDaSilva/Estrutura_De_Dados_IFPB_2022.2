@@ -3,9 +3,9 @@ from notacaoPolonesa import *
 
 N1=NotacaoPosfixa()
 try:
-    N1.receberOperacao(input())
-
+    while True:
+        N1.receberOperacao(input('Digite uma operação: '))
+        print(N1.mostrarSaida())
+        
 except NotacaoException as NE:
     print(NE)
-print(N1.mostrarOperadoresPilha())
-print(N1.mostrarSaida())
