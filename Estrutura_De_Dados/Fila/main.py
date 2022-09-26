@@ -1,5 +1,5 @@
-from filaSequencialCircular import *
-#from filaEncadeada import *
+#from filaSequencialCircular import *
+from filaEncadeadaNoCabeca import *
 
 #== == == == Variáveis
 separador= '\n'+('-0-0'*30)

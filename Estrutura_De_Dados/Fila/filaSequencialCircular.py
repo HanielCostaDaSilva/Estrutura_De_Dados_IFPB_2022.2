@@ -1,4 +1,4 @@
-#== == == == Pilha Exception
+#== == == == Fila Exception
 class FilaException(Exception):
     def __init__(self, msg):
         super().__init__(msg)
@@ -16,11 +16,11 @@ class Fila:
         self.__primeiroPosicao=0
         self.__ultimoPosicao= -1
 
-#== == == == Método para examinar se a pilha está vazia
+#== == == == Método para examinar se a Fila está vazia
     def estaVazia(self)->bool:
         return len(self.__fila) == 0
     
-#== == == == Método para checar o tamanho da Pilha
+#== == == == Método para checar o tamanho da Fila
 
 #== == Checa a quantidade de nós inserido
     def __len__(self):
@@ -33,9 +33,9 @@ class Fila:
 #== == == == Método que retornára o contéudo de um nó dependendo da possição exigida.
     def elemento(self, posicao:int)->any:
         try:
-            #== == Só funciona se: a pilha NÃO estiver vazia e a posição inserida não exceda o tamanho limite da lista.
+            #== == Só funciona se: a Fila NÃO estiver vazia e a posição inserida não exceda o tamanho limite da lista.
             assert not self.estaVazia() ,'A lista está vazia!'
-            assert self.__len__()>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da pilha é de {self.__len__()} nó(s)!'
+            assert self.__len__()>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da Fila é de {self.__len__()} nó(s)!'
             
             return self.__fila[posicao]
         
@@ -74,9 +74,9 @@ class Fila:
 ##== == == == Método que Modificará o contéudo de um nó a partir da possição exigida.
     def modificar(self, posicao:int, conteudo: any):
         try:
-            #== == Só funciona se: a pilha NÃO estiver vazia e a posição inserida não exceda o tamanho da lista.
+            #== == Só funciona se: a fila NÃO estiver vazia e a posição inserida não exceda o tamanho da lista.
             assert not self.estaVazia() ,'A lista está vazia!'
-            assert self.__len__()>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da pilha é de {self.__len__()} nó(s)!'
+            assert self.__len__()>=posicao and posicao>0, f'A posição inserida é inválida, pois o tamanho da fila é de {self.__len__()} nó(s)!'
         
             self.__fila[posicao-1]= conteudo
  
@@ -86,7 +86,7 @@ class Fila:
         except Exception as E:
             raise FilaException(E)
         
-    #== == Adiciona um novo Nó na Pilha.
+    #== == Adiciona um novo Nó na fila.
     def enfileira(self, conteudo:any):
         try:
             assert self.tamanho() > self.__len__(), 'A fila está cheia!'
@@ -129,7 +129,7 @@ class Fila:
         except Exception as E:
             raise FilaException(E)
 
-    #== == Desempilha a pilha até ela possuir Zero Nós.
+    #== == Desenfila a fila até ela possuir Zero Nós.
     def esvazia(self):
         try:
             while self.__nosInseridoQuantidade>0:
