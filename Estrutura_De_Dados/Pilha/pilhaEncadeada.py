@@ -133,11 +133,7 @@ class Pilha:
         
         while not pilhaAuxiliar.estaVazia():
             self.empilha(pilhaAuxiliar.desempilha())
-            
     
-
-
-
 
     def __str__(self)->str:
         if self.__tamanho==0:
