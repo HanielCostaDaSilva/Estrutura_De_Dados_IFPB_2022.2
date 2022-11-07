@@ -2,11 +2,25 @@ from ArvoreBinaria import ArvoreBinaria,NodeException, BinaryArborException
 import time
 import os
 
-arv = ArvoreBinaria('A')
+#== == == == Exemplo pronto
+arv = ArvoreBinaria(12)
+arv.addFilhoDireito(13)
+arv.addFilhoEsquerdo(11)
+arv.descerDireita()
+arv.addFilhoDireito(15)
+arv.addFilhoEsquerdo(18)
+arv.descerEsquerda()
+arv.addFilhoEsquerdo(19)
+arv.resetCursor
+arv.descerEsquerda()
+arv.addFilhoDireito(21)
+arv.addFilhoEsquerdo(22)
 
+#== == == == Funções
 def MostrarDicionario(dicionario:dict, Chave:str = '1'):
 
     if dicionario.get(Chave,False)==False:
+        print(f'{"-":^5}=> {dicionario["-"]:^5} ')
         return
     print(f'{Chave :^5}=> {dicionario[Chave]:^5} ')
     MostrarDicionario(dicionario, str(int(Chave) +1 ) )
@@ -27,7 +41,11 @@ opcoesArvore={
     '12':'Mover o cursor atrás de um nó específico',
     '13':'Esvaziar a Árvore',
     '14':'Mostrar o tamanho da árvore',
-    '15':'finalizar o programa',
+    '15': 'Mover o cursor para raiz',
+    '16': 'Adicionar Nó raiz',
+    '17': 'Contar a quantidade de nós folhas',
+    '18': 'Contar a profundidade',
+    '-':'finalizar o programa',
 }
 
 opcoesArvoreChaves= list(opcoesArvore.keys())
@@ -79,7 +97,7 @@ while True:
             print(arv.descerDireita())
 
 #== == == == == ==
-        elif escolha=='8' or escolha=='9' or escolha=='12':
+        elif escolha=='8' or escolha=='9' or escolha=='12' or escolha=='16':
             NodeValue= input('digite o valor do Nó: ')
             
             if escolha=='8': #== == == Adiciona um nó à esquerda do cursor
@@ -93,18 +111,34 @@ while True:
             elif escolha=='12': #== == == Move o cursor para um determinado nó
                 arv.go(NodeValue)
                 print(f'Cursor movido para o Nó {NodeValue}!')
-            
-        elif escolha=='13': #== == == Mostra o valor da raiz
+                    
+            elif escolha=='16':#== == == Adiciona uma raiz
+                arv.adicionarRaiz(NodeValue)
+                print('Raiz criada com sucesso!')
+           
+        elif escolha=='13': #== == ==Esvazia a árvore
             print(arv.esvazia())
         
         elif escolha=='14':#== == == Mostra a quantidade de Nós
             print('Quantidade de nós até agora: ', arv.__len__())
         
-        elif escolha=='15':#== == == Encerra o programa
+        elif escolha=='15':#== == == Reseta o cursor
+           arv.resetCursor()
+           print('cursor movido para a raiz, com sucesso!')
+        
+        elif escolha=='17':#== == == Reseta o cursor
+            print('Quantidade de nós folhas: ',arv.leafs())
+                
+        elif escolha=='18':#== == == Reseta o cursor
+            print('Altura: ',arv.profundidade())           #=======ERRRO! CONTANDO A MAIOR QUANTIDADE DE NÒS
+
+
+        elif escolha=='-':#== == == Encerra o programa
             break
         else:
             raise(Exception('CHOICE NOT FOUND'))
         input()
+        os.system('clear')
 
     except NodeException as NE:
         os.system('clear')

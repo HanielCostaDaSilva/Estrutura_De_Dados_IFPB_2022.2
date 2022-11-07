@@ -275,3 +275,46 @@ class ArvoreBinaria:
             
             proximoNo.dir= proximoNo=self.__libera(proximoNo.dir)
         return None
+    
+    def adicionarRaiz(self,NodeCarga:Node):
+        try:
+            assert self.estaVazia()
+            self.__raiz=Node(NodeCarga)
+            self.__cursor=self.__raiz
+        except AssertionError:
+            raise BinaryArborException('THERE IS A ROOT')
+        
+    #== == == Método que mostra a quantidade de nós folhas presente na árvore
+    def leafs(self):
+        try:
+            assert not( self.estaVazia())
+            return self.__leafs(self.__raiz)
+        except AssertionError:
+            raise BinaryArborException('THERE IS NOT A ROOT')
+    
+    
+    def __leafs(self,proximoNo:Node):
+        leafsQuanty=0
+        if proximoNo==None: #== == Só por precaução...
+            return leafsQuanty
+        if proximoNo.dir==None and proximoNo.esq==None:
+            return 1
+        leafsQuanty+=self.__leafs(proximoNo.esq)
+        leafsQuanty+=self.__leafs(proximoNo.dir)
+        return leafsQuanty
+    
+    def profundidade(self):
+        try:
+            assert not( self.estaVazia())
+            return (self.__profundidade(self.__raiz) -1)
+        except AssertionError:
+            raise BinaryArborException('THERE IS NOT A ROOT')
+        
+    def __profundidade(self, proximoNo:Node):
+        alturaEsquerda=0
+        alturaDireita=0
+        if proximoNo==None:
+            return 0
+        alturaEsquerda= 1 + self.__profundidade(proximoNo.esq)
+        alturaDireita= 1 + self.__profundidade(proximoNo.dir)
+        return (max(alturaEsquerda,alturaDireita))
