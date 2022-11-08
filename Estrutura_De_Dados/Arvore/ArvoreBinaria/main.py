@@ -4,17 +4,24 @@ import os
 
 #== == == == Exemplo pronto
 arv = ArvoreBinaria(12)
-arv.addFilhoDireito(13)
 arv.addFilhoEsquerdo(11)
+arv.addFilhoDireito(13)
 arv.descerDireita()
-arv.addFilhoDireito(15)
 arv.addFilhoEsquerdo(18)
+arv.addFilhoDireito(15)
 arv.descerEsquerda()
 arv.addFilhoEsquerdo(19)
-arv.resetCursor
+arv.descerEsquerda()
+arv.addFilhoEsquerdo(34)
+arv.addFilhoDireito(35)
+arv.descerEsquerda()
+arv.addFilhoDireito(45)
+arv.resetCursor()
 arv.descerEsquerda()
 arv.addFilhoDireito(21)
 arv.addFilhoEsquerdo(22)
+arv.resetCursor()
+arv.descerEsquerda()
 
 #== == == == Funções
 def MostrarDicionario(dicionario:dict, Chave:str = '1'):
@@ -44,7 +51,8 @@ opcoesArvore={
     '15': 'Mover o cursor para raiz',
     '16': 'Adicionar Nó raiz',
     '17': 'Contar a quantidade de nós folhas',
-    '18': 'Contar a profundidade',
+    '18': 'Calcular a altura da árvore',
+    '19': 'Encontrar o nível de um nó ',
     '-':'finalizar o programa',
 }
 
@@ -75,13 +83,14 @@ while True:
             elif escolha=='3':#== == == Mostra a árvore em pós-ordem
                 arv.posordem(origem)
                 
-            elif escolha=='10' or escolha=='11': 
-                NodeValue= input('digite o valor do Nó: ')
+            elif escolha=='10' or escolha=='11' : 
+                NodeValue= int(input('digite o valor do Nó: '))#-- POR SER NÚMEROS, USEI O INT
                 
                 if escolha=='10':
                     arv.busca(NodeValue,origem)
                 if escolha=='11': #== == == Procura a existência de um nó à partir de uma determinada origem
                     arv.busca(NodeValue,origem)
+
             
         
         elif escolha=='4': #== == == Mostra o valor da raiz
@@ -97,8 +106,8 @@ while True:
             print(arv.descerDireita())
 
 #== == == == == ==
-        elif escolha=='8' or escolha=='9' or escolha=='12' or escolha=='16':
-            NodeValue= input('digite o valor do Nó: ')
+        elif escolha=='8' or escolha=='9' or escolha=='12' or escolha=='16' or escolha =='19':
+            NodeValue= int(input('digite o valor do Nó: '))#-- POR SER NÚMEROS, USEI O INT
             
             if escolha=='8': #== == == Adiciona um nó à esquerda do cursor
                 arv.addFilhoEsquerdo(NodeValue)
@@ -107,7 +116,7 @@ while True:
             elif escolha=='9': #== == == Adiciona um nó à direita do cursor
                 arv.addFilhoDireito(NodeValue)
                 print(f'Nó {NodeValue} adicionado a direita!')
-            
+                
             elif escolha=='12': #== == == Move o cursor para um determinado nó
                 arv.go(NodeValue)
                 print(f'Cursor movido para o Nó {NodeValue}!')
@@ -115,7 +124,10 @@ while True:
             elif escolha=='16':#== == == Adiciona uma raiz
                 arv.adicionarRaiz(NodeValue)
                 print('Raiz criada com sucesso!')
-           
+            
+            elif escolha=='19': #== == == Descobre o nível de um Nó
+                nivel=arv.getLevel(NodeValue)
+                print(f'o Nó com a chave: {NodeValue}, se encontra no nível: {nivel}')
         elif escolha=='13': #== == ==Esvazia a árvore
             print(arv.esvazia())
         
@@ -130,7 +142,7 @@ while True:
             print('Quantidade de nós folhas: ',arv.leafs())
                 
         elif escolha=='18':#== == == Reseta o cursor
-            print('Altura: ',arv.profundidade())           #=======ERRRO! CONTANDO A MAIOR QUANTIDADE DE NÒS
+            print('Altura: ',arv.profundidade())        #=======ERRRO! CONTANDO A MAIOR QUANTIDADE DE NÒS
 
 
         elif escolha=='-':#== == == Encerra o programa
@@ -153,35 +165,3 @@ while True:
         os.system('clear')
         print(E)
         time.sleep(2)
-        
-'''
-arv = ArvoreBinaria(2)
-print('Criada a árvore')
-arv.addFilhoEsquerdo(7)
-arv.addFilhoDireito(5)
-print('Raiz: ', arv.getRaiz())
-print('Cursor: ', arv.getCursor())
-print('Tamanho: ', len(arv))
-arv.descerEsquerda()
-arv.addFilhoEsquerdo(9)
-arv.descerEsquerda()
-arv.addFilhoDireito(3)
-
-print('Raiz: ', arv.getRaiz())
-print('Cursor: ', arv.getCursor())
-print('Tamanho: ', len(arv))
-
-arv.resetCursor()
-arv.descerDireita()
-arv.addFilhoEsquerdo(10)
-
-print()
-arv.preordem()
-
-print('Raiz: ', arv.getRaiz())
-print('Cursor: ', arv.getCursor())
-print('Tamanho: ', len(arv))
-
-print('Busca:', arv.busca(3))
-no = arv.go(3)
-print('go:', no)'''

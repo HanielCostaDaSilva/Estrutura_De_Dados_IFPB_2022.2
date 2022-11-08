@@ -81,7 +81,7 @@ class ArvoreBinaria:
     def __preordem(self, no:Node):
         if no==None:
             return
-        print(no.carga)
+        print(no, end='=+=')
         self.__preordem(no.esq)
         self.__preordem(no.dir)
         
@@ -101,7 +101,7 @@ class ArvoreBinaria:
         if no==None:
             return
         self.__emordem(no.esq)
-        print(no)
+        print(no, end='=+=')
         self.__emordem(no.dir)
         
     #== == == Retorna os elementos em pós-ordem
@@ -120,7 +120,7 @@ class ArvoreBinaria:
             return
         self.__posordem(no.dir)
         self.__posordem(no.esq)
-        print(no)
+        print(no, end='=+=')
         #== == == Move o cursor para a equerda do nó      
     def descerEsquerda(self):
         try:
@@ -267,13 +267,13 @@ class ArvoreBinaria:
         except AssertionError:
             raise BinaryArborException('NO ROOT!')
         
-    def __libera(self,proximoNo)->None:
+    def libera(self,proximoNo)->None:
         
         if ( not self.estaVazia() and proximoNo != None):
             
-            proximoNo.esq= self.__libera(proximoNo.esq)
+            proximoNo.esq= self.libera(proximoNo.esq)
             
-            proximoNo.dir= proximoNo=self.__libera(proximoNo.dir)
+            proximoNo.dir= proximoNo=self.libera(proximoNo.dir)
         return None
     
     def adicionarRaiz(self,NodeCarga:Node):
@@ -318,3 +318,31 @@ class ArvoreBinaria:
         alturaEsquerda= 1 + self.__profundidade(proximoNo.esq)
         alturaDireita= 1 + self.__profundidade(proximoNo.dir)
         return (max(alturaEsquerda,alturaDireita))
+    
+    def getLevel(self,key):
+        try:
+            assert not( self.estaVazia())
+            level=(self.__getLevel(key,self.__raiz) - 1 )
+
+        except AssertionError:
+            raise BinaryArborException('THERE IS NOT A ROOT')
+
+    def __getLevel(self,key, NodeAtual:Node)->int:
+        level=0
+
+        if NodeAtual==None:
+            return level # caso tenha chegado no extremo da árvore
+        
+        if NodeAtual.carga == key:  # ele achou a carga, então retornará 1
+            return level + 1
+        
+        level = self.__getLevel(key,NodeAtual.esq)
+        if level: 
+            return level + 1 # encontrou o nó na esqueda
+        
+        level = self.__getLevel(key,NodeAtual.dir)
+        if level: 
+            return level + 1 # encontrou o nó na direita
+        
+        return level + 1# Não achou em nenhum dos casos
+        
