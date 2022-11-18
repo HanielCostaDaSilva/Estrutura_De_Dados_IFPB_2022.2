@@ -319,10 +319,11 @@ class ArvoreBinaria:
         alturaDireita= 1 + self.__profundidade(proximoNo.dir)
         return (max(alturaEsquerda,alturaDireita))
     
-    def getLevel(self,key):
+    def getLevel(self,key)->int:
         try:
             assert not( self.estaVazia())
             level=(self.__getLevel(key,self.__raiz) - 1 )
+            return level
 
         except AssertionError:
             raise BinaryArborException('THERE IS NOT A ROOT')
