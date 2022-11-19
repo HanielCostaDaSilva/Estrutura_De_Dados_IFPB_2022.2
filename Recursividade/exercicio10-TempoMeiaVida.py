@@ -1,7 +1,7 @@
-def TempoDeMeiaVida(massa,tempoDeDecaimento)->list:
+def TempoDeMeiaVida(massa,tempoDeDecaimento)->list[float,int,int]:
     
     if massa<=0.8:
-        return [massa,0,0]
+        return [massa,0,0] 
     resultado=TempoDeMeiaVida(massa/2,tempoDeDecaimento)
     resultado[1] +=1
     resultado[2]=resultado[1]*tempoDeDecaimento
