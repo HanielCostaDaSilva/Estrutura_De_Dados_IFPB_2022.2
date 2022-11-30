@@ -27,85 +27,74 @@ opcoesLista={
 }
 opcoesListaChaves= list(opcoesLista.keys())
 
-stringsLista=['Letra','UmaLetra','OutraLetra','TerceiraLetra','QuartaLetra','23']
-inteirosLista=[0,2,4,6,8,10,12,14,16,18,20,22,24,26]
+L1=Lista()
+#-- -- Preenchendo sozinho:
+for i in range(1,17,3):
+    L1.inserir(i, (i*3)//2)
+while True:
+    try:
+        print()
+        Posicao=0
+        Chave=0
+        Carga=''
+        print('Escolha uma das seguintes opções: ')
+        MostrarDicionario(opcoesLista)
+        escolha=input('\n escolha: ')
+#== == == == == ==
+        if escolha=='-':#== == == Encerra o programa
+            break
+        escolha=int(escolha)  
+        
+        if escolha<6 and escolha not in [0,3,4]: #Escolhas que precisam de um informação
+            Posicao=int(input('Digite qual a posição desejada para realizar tal operação: '))
+        
+        if escolha==1 or escolha==4 or escolha==6 : #Escolhas que precisam de uma chave
+            Chave= int(input('Digite o valor da chave do Nó: '))
+        
+        if escolha==0:# Informações da Lista
+            print(L1)
+        
+        elif escolha== 1: # Inserir um Novo nó  
+            Carga= int(input('Digite a Carga do nó: '))
+            L1.inserir(Chave,Carga,Posicao)
+        
+        elif escolha==2:#Remove Nó
+            print(L1.remover(Posicao))      
+        
+        elif escolha==3: #Vê se a lista está vazia
+            print(L1.estaVazia())
+        
+        elif escolha==4:#Modificar o Nó
+            modificacao=int(input('Digite o valor que desja inserir no Node: '))
+            print(L1.modificarNode(Chave,modificacao)) 
+        
+        elif escolha==5:#Descobre o nó pela posição
+            print(L1.elemento(Posicao))
+        
+        elif escolha==6: #Recebe uma chave, busca a posição de um nó
+            print(L1.busca(Chave))
+        
+        
+        elif escolha==7:# Informações da Lista
+            print(L1.tamanho())
 
-#== == == == Criando as listas
-listaInteiros = Lista()
-listaLetras=Lista()
-
-#== == == == == Inserindo as listas
-
-for i in stringsLista:
-    listaLetras.inserir(0,i)
-
-for i in inteirosLista:
-    listaInteiros.inserir(0,i)
-
-try:
-    print(listaInteiros)
-    print(listaLetras)
-    print(separador)
+        elif escolha==8:# Informa o que tem no nó leader
+            print(L1.NodeLeader)
+       
+        elif escolha==9:# Esvaziar a Lista
+            print(L1.esvazia())
     
-    input(' ')
-#== == == == == Buscando Elementos por posição   
-    #print(listaLetras.busca('EstaLetra'))
-    #print(listaInteiros.busca(13))
-    print('buscando a posição de determinados nós')
-    print(listaLetras.busca('UmaLetra'))
-    print(listaInteiros.busca(6))
-    print(separador)
-    
-    input(' ')
-#== == == == ==Removendo    
-    print('Saiu este nó: ',listaInteiros.remover(3))
-    print('Saiu este nó: ',listaLetras.remover(3))
-    print(listaInteiros,'\n', listaLetras)
-    print(separador)
-    
-    input(' ')
-    #print(listaInteiros.elemento(20))
-    #print(listaLetras.elemento(30))
-    
-#== == == == Descubrindo o conteudo de elementos através da posição 
-    print('descobrindo o contéudo de uma posição X \n',listaInteiros.elemento(3))
-    print(listaLetras.elemento(5))
-    print(separador)
-    
-    input(' ')
-
-#== == == == Modificando o conteudo de elementos 
-    for i in range(3):
-        listaInteiros.modificar(i+1,listaInteiros.elemento(i+1) *4)
-    
-
-    
-    for j in range(3):
-        listaLetras.modificar(j+1,'Não é ' + listaLetras.elemento(j+1))
-    
-    print('Modifcano os nós\n',listaInteiros,'\n\n', listaLetras)
-    print(separador)
-    input(' ')
-
-#== == == == Esvaziando a Lista
-
-    print('esvaziando a lista \n',listaLetras.esvazia())
-    print(listaInteiros.esvazia())
-    #print('\n',listaInteiros,'\n\n', listaLetras)
-    print(separador)
-    input(' ')
+        else:
+            raise(Exception('CHOICE NOT FOUND'))
+        input()
+        os.system('clear')
 
 
-#== == == == Inserido elementos depois de apagar a lista:
-    print('inserindo elementos em um nó depois de tê-lo esvaziado')
-    for i in range(10):
-        listaInteiros.inserir(i+1,(( (i+10) * 4 +2 ) %5)-12 )
-        listaLetras.inserir(i+1,'Letra '* ( ((i+1)%3)+1) )
-    print(listaInteiros)
-    print(listaLetras)
-    print(separador)
-    input(' ')
-    
-#== == == == Possíveis excessões    
-except ListaException as LE:
-    print(LE)
+    except ListaException as LE:
+        os.system('clear')
+        print(LE)
+        time.sleep(2)
+    except Exception as E:
+        os.system('clear')
+        print(E)
+        time.sleep(2)
