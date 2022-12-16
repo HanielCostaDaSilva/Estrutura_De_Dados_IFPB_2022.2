@@ -1,4 +1,3 @@
-
 def selectionSort(array):
     for i in range(len(array)-1):
         min = i
