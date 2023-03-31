@@ -120,6 +120,7 @@ class Pilha:
         novoNo.prox=self.__start
         self.__start=novoNo
         self.__tamanho +=1
+        
     #== == Remove o Ùltimo Nó adicionado na Pilha.
     def desempilha(self)->any:
         '''Remove o nó do topo da lista.'''
@@ -183,7 +184,6 @@ class Pilha:
     def __str__(self)->str:
         if self.__tamanho==0:
             return 'Empty'
-        
         s = ''
         cont=0
         cursor=self.__start
