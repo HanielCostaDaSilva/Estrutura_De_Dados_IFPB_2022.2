@@ -10,6 +10,7 @@ class FilaException(Exception):
 class Fila:
     __tamanhoLimite=15
     __nosInseridoQuantidade=0
+    
     def __init__(self):
         
         self.__fila=[None for i in range(self.__tamanhoLimite)] # A fila inicia vazia .
@@ -28,7 +29,7 @@ class Fila:
     
 #== == Checa o tamanho Máximo    
     def tamanho(self):
-        return len(self.__fila)
+        return self.__nosInseridoQuantidade
 
 #== == == == Método que retornára o contéudo de um nó dependendo da possição exigida.
     def elemento(self, posicao:int)->any:
@@ -50,7 +51,6 @@ class Fila:
         try:
             #== == O método só não funciona quando a lista estiver vazia
             assert not self.estaVazia() ,'A lista está vazia!'
-            
             cont=1
             cursorPosicao=self.__primeiroPosicao
             while cont < self.__len__():
@@ -89,16 +89,11 @@ class Fila:
     #== == Adiciona um novo Nó na fila.
     def enfileira(self, conteudo:any):
         try:
-            assert self.tamanho() > self.__len__(), 'A fila está cheia!'
-                
-            if self.__ultimoPosicao + 1 >= self.tamanho(): # caso o nó inserido extrapole o tamanho da lista, ele será inserido na posição 0
-                
-                self.__ultimoPosicao=0
-                self.__fila.insert(self.__ultimoPosicao, conteudo)
-            else:
-                
-                self.__ultimoPosicao+=1
-                self.__fila.insert(self.__ultimoPosicao,conteudo)
+            assert self.__nosInseridoQuantidade < self.__tamanhoLimite, 'A fila está cheia!'
+            
+            self.__ultimoPosicao=(self.__ultimoPosicao+1)%self.__tamanhoLimite
+            
+            self.__fila.insert(self.__ultimoPosicao,conteudo)
             
             self.__nosInseridoQuantidade+=1
         
@@ -140,8 +135,8 @@ class Fila:
 
     def __str__(self)->str:
         if self.__nosInseridoQuantidade==0:
-            raise FilaException('Empty')
-        s = ''
+            return 'Empty'
+        s = 'Fila Sequencial Circular \n'
         
         cursorPosicao=self.__primeiroPosicao
         cont=0

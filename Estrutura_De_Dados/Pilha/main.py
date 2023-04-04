@@ -54,16 +54,22 @@ def checarPalindromo(frase:str):
 
 def decToBin( numero:int):
     '''Método que transforma um número decimal em binário '''
-    pilhaAuxiliar=Pilha()
-    while numero>=0:
-        resto=numero%2
-        numero=numero//2
-        pilhaAuxiliar.empilha(str(resto))
+    
+    pilhaAuxiliar=Pilha() #Utilizamos uma única pilha no processo
+    
+    while numero>= 0: # 0
+        
+        resto=numero%2 #1 % 2 = 1
+        
+        numero= numero // 2 #1 // 2 = 0  
+        
+        pilhaAuxiliar.empilha(str(resto)) # 0 1
         if numero==0:
             break
     
     numeroBinario=''
-    while not(pilhaAuxiliar.estaVazia()):
+
+    while not(pilhaAuxiliar.estaVazia()): 
         numeroBinario+= pilhaAuxiliar.desempilha()
     
     return int(numeroBinario)
