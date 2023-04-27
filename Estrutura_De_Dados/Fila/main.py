@@ -1,7 +1,7 @@
 import os
 import time
-#from filaEncadeadaNoCabeca import *
-from filaSequencialCircular import *
+from filaEncadeadaNoCabeca import *
+#from filaSequencialCircular import *
 
 
 def mostrarDicionario(dicionario:dict)->str:
@@ -91,12 +91,9 @@ while True:
             raise(Exception('CHOICE NOT FOUND'))
         input()
         os.system('clear')
-
-    except FilaException as LE:
+    except FilaException as FE:
         os.system('clear')
-        print(LE)
-        time.sleep(2)
+        print(FE)
     except Exception as E:
         os.system('clear')
         print(E)
-        time.sleep(2)

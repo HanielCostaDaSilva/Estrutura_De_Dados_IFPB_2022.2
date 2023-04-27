@@ -158,3 +158,4 @@ class Fila:
             cont+=1 
 
         return s + f'\n Nós inseridos até agora: {self.__Cabeca.tamanho}'
+    
