@@ -97,4 +97,4 @@ class Lista:
             s+= f'=|Nó {i+1}: {self.__lista[i]} |= '
         return s + f'\n tamanho: {len(self.__lista)}'
     
-
+    
