@@ -184,3 +184,10 @@ class Lista:
             s+= f'{i+1}|{self.elemento(i+1)}\n'
 
         return s
+    
+    
+    def concatenar(self, outraLista:'Lista'):
+        
+        while not(outraLista.estaVazia()):
+            NodeRemovido=outraLista.remover(1)
+            self.inserir(NodeRemovido.key,NodeRemovido.carga)

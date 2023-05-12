@@ -14,10 +14,12 @@ class No:
         self.prox=None
 
 class NoCabeca:
-    tamanho=0
-    start=None
-    end=None
-
+    __tamanho=0
+    __start=None
+    __end=None
+    
+    def __str__(self):
+        return f'tamanho: {self.tamanho}. Nó inicial: {self.start}. Nó final: {self.end}'
 #== == == == A estrutura de dado Fila, ou FIFO.
 
 class Fila:
@@ -143,8 +145,8 @@ class Fila:
 
     def __str__(self)->str:
         if self.__Cabeca.tamanho==0:
-            raise FilaException('Empty')
-        s = ''
+            return 'Empty'
+        s = 'Fila Encadeada Nó Cabeça \n'
         cursor=self.__Cabeca.start
         cont=0
         
@@ -156,3 +158,4 @@ class Fila:
             cont+=1 
 
         return s + f'\n Nós inseridos até agora: {self.__Cabeca.tamanho}'
+    
