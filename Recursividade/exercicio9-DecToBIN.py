@@ -9,3 +9,4 @@ def decToBin(inteiro:int)->int:
 
 inteiro=int(input('Digite o número que desejas transformar em binário: '))
 print(f'o número: {inteiro} é na base binária: {decToBin(inteiro)}')
+

@@ -106,7 +106,7 @@ opcoesPilha={
     
 }
 
-pilhasLista=[None for i in range(10)]# O programa será multipilhas.
+pilhasLista=[None    for i in range(10)]# O programa será multipilhas.
 posicaoPilhaAtual=0 #Posicao em que o usuario se encontra atualmente.
 
 #-- -- Preenchendo a Lista de Pilhas:
@@ -166,7 +166,6 @@ while True:
         
         elif escolha=='B': #Recebe uma chaveBusca, busca a posição de um nó
             print(pilhaAtual.busca(chaveBusca))
-        
         
         elif escolha=='T':# Tamanho da Pilha
             print(len(pilhaAtual))

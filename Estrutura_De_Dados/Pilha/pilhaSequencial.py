@@ -7,6 +7,7 @@ class PilhaException(Exception):
 
 #== == == == A estrutura de dado Pilha, ou LIFO.
 class Pilha:
+    
     def __init__(self):
         self.__pilha=[] # A pilha inicia vazia.
 
